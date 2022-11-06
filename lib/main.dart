@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print(prefs.getString('user'));
     if (prefs.getString('user') != null &&
         prefs.getString('password') != null) {
-      EasyLoading.show(status: 'Login');
+      EasyLoading.show(status: 'Mengambil Sesi Login');
       API.user = prefs.getString('user');
       API.pass = prefs.getString('password');
       await memuat();
@@ -161,69 +161,76 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        SizedBox(
-          height: 300,
-        ),
-        Center(
-          child: Stack(
-            children: [
-              SafeArea(
-                  child: Center(
-                child: Container(
-                    padding: const EdgeInsets.all(5.0),
-                    child: TextField(
-                        textAlign: TextAlign.center,
-                        controller: username,
-                        decoration: const InputDecoration(
-                            border: InputBorder.none, hintText: 'Username')),
-                    width: 283,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(220, 220, 220, 220))),
-              )),
-            ],
+        body: Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/background.png'), fit: BoxFit.cover)),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 300,
           ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Center(
-          child: Stack(
-            children: [
-              SafeArea(
-                  child: Center(
-                child: Container(
-                    padding: const EdgeInsets.all(5.0),
-                    child: TextField(
-                        textAlign: TextAlign.center,
-                        controller: password,
-                        decoration: const InputDecoration(
-                            border: InputBorder.none, hintText: 'Password')),
-                    width: 283,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(220, 220, 220, 220))),
-              )),
-            ],
+          Center(
+            child: Stack(
+              children: [
+                SafeArea(
+                    child: Center(
+                  child: Container(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextField(
+                          textAlign: TextAlign.center,
+                          controller: username,
+                          decoration: const InputDecoration(
+                              border: InputBorder.none, hintText: 'Username')),
+                      width: 283,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(220, 220, 220, 220))),
+                )),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        SizedBox(
-          width: 200,
-          height: 40,
-          child: ElevatedButton(
-              onPressed: () async {
-                EasyLoading.show(status: 'Login');
-                await login(username.text, password.text);
-                EasyLoading.dismiss();
-              },
-              child: Text("Login")),
-        )
-      ],
+          SizedBox(
+            height: 5,
+          ),
+          Center(
+            child: Stack(
+              children: [
+                SafeArea(
+                    child: Center(
+                  child: Container(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextField(
+                          textAlign: TextAlign.center,
+                          controller: password,
+                          decoration: const InputDecoration(
+                              border: InputBorder.none, hintText: 'Password')),
+                      width: 283,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(220, 220, 220, 220))),
+                )),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            width: 200,
+            height: 40,
+            child: ElevatedButton(
+                onPressed: () async {
+                  EasyLoading.show(status: 'Login');
+                  await login(username.text, password.text);
+                  EasyLoading.dismiss();
+                },
+                child: Text("Login")),
+          )
+        ],
+      ),
     ));
   }
 }

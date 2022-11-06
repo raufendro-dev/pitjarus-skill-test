@@ -198,12 +198,12 @@ class _StoreScreenState extends State<StoreScreen> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(14.0),
+          padding: const EdgeInsets.all(10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SafeArea(
-                child: Text('Hi! ' + '\n' + API.user),
+                child: Text('Hi, ' + API.user + '!'),
               ),
               TextButton(
                   child: Text("  Logout  ", style: TextStyle(fontSize: 14)),
@@ -236,15 +236,15 @@ class _StoreScreenState extends State<StoreScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(25.0)))),
           ),
         ),
-        SizedBox(
-          height: 200,
-          width: 400,
-          child: GoogleMap(
-            initialCameraPosition: _kInitialPosition,
+        Padding(
+          padding: EdgeInsets.all(10),
+          child: SizedBox(
+            height: 200,
+            width: 400,
+            child: GoogleMap(
+              initialCameraPosition: _kInitialPosition,
+            ),
           ),
-        ),
-        Center(
-          child: Text(lat + ', ' + long),
         ),
         Expanded(
             child: Scrollbar(
@@ -275,14 +275,10 @@ class _StoreScreenState extends State<StoreScreen> {
                           style: const TextStyle(
                               fontFamily: "Roboto",
                               fontWeight: FontWeight.bold)),
-                      subtitle: Text(API.simpan[index]['address'].toString() +
+                      subtitle: Text('Alamat: ' +
+                          API.simpan[index]['address'].toString() +
                           '\n' +
-                          API.simpan[index]['regname'].toString() +
-                          '\n' +
-                          API.simpan[index]['lat'].toString() +
-                          '\n' +
-                          API.simpan[index]['long'].toString() +
-                          '\n' +
+                          'Jarak: ' +
                           API.jarak[index].toString() +
                           ' m' +
                           '\n' +
@@ -407,7 +403,13 @@ class StoreView extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade,
+                              child: StoreScreen()));
+                    },
                     child: Text("No Visit")),
               ),
               SizedBox(
