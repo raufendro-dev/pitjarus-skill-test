@@ -4,7 +4,6 @@ import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:pitjarus/temp/jembatan.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pitjarus/Screen/StoreScreen.dart';
 import 'package:pitjarus/func/Database.dart';

@@ -4,7 +4,6 @@ import 'package:flutter_awesome_buttons/flutter_awesome_buttons.dart';
 import 'package:pitjarus/func/Controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pitjarus/Screen/StoreScreen.dart';
-import 'package:pitjarus/temp/jembatan.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';

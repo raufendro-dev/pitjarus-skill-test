@@ -3,7 +3,6 @@ import 'package:pitjarus/func/Database.dart';
 import 'package:pitjarus/main.dart';
 import '../func/Controller.dart';
 import 'package:flutter_awesome_buttons/flutter_awesome_buttons.dart';
-import 'package:pitjarus/temp/jembatan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:geolocator/geolocator.dart';

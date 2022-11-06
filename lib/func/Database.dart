@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:pitjarus/Screen/StoreScreen.dart';
 import 'package:pitjarus/func/Controller.dart';
-import 'package:pitjarus/temp/jembatan.dart';
 import 'package:sqflite/sqflite.dart';
 
 class basisData {
