@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       await memuat();
 
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           PageTransition(type: PageTransitionType.fade, child: StoreScreen()));
     } else {
       CoolAlert.show(
@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       if (API.simpan != null && API.hitungvar != null) {
         await Future.delayed(const Duration(seconds: 3));
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             PageTransition(
                 type: PageTransitionType.fade, child: StoreScreen()));

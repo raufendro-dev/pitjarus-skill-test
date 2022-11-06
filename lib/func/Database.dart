@@ -131,14 +131,10 @@ class basisData {
       );
     }
 
-    Future<void> deleteToko(int id) async {
+    Future<void> deleteToko(param) async {
       // Get a reference to the database.
       final db = await database;
-
-      // Remove the Toko from the database.
-      await db.delete('tokos'
-          // Use a `where` clause to delete a specific toko
-          );
+      db.delete("tokos");
     }
 
     if (param == "hitung") {
@@ -154,7 +150,7 @@ class basisData {
       await updateToko(body);
     }
     if (param == "delete") {
-      await deleteToko(body);
+      deleteToko(body);
     }
     if (param == "select") {
       var datadb = await selectToko();

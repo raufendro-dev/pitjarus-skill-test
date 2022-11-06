@@ -27,6 +27,9 @@ class _StoreScreenState extends State<StoreScreen> {
   var sementaraToko;
   var count;
   var latAPI;
+  List<dynamic> itemToko = [];
+
+  List<dynamic> itemTokoduplikat = [];
   //var count = int.parse(hitung);
 
   final ScrollController _scrollController = ScrollController();
@@ -36,6 +39,29 @@ class _StoreScreenState extends State<StoreScreen> {
     prefs.remove("user");
     prefs.remove("password");
     await basisData.main("delete", "");
+  }
+
+  void filterSearchResults(String query) {
+    List<dynamic> dummySearchList = [];
+    dummySearchList.addAll(itemTokoduplikat);
+    if (query.isNotEmpty) {
+      List<dynamic> dummyListData = [];
+      List outputList =
+          dummySearchList.where((o) => o['storename'] == query).toList();
+
+      setState(() {
+        if (outputList.length == 0) {
+          itemToko = itemTokoduplikat;
+        } else {
+          itemToko = outputList;
+        }
+      });
+      return;
+    } else {
+      setState(() {
+        itemToko = itemTokoduplikat;
+      });
+    }
   }
 
   load() {
@@ -58,6 +84,11 @@ class _StoreScreenState extends State<StoreScreen> {
 
   @override
   void initState() {
+    itemToko = API.simpan.toList();
+    itemTokoduplikat = itemToko;
+    print('initoko');
+    print(itemToko);
+
     checkGps();
     load();
     super.initState();
@@ -214,9 +245,14 @@ class _StoreScreenState extends State<StoreScreen> {
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                               side: BorderSide(color: Colors.black)))),
-                  onPressed: () {
-                    hapus();
-                    Navigator.push(
+                  onPressed: () async {
+                    basisData.main("delete", "");
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.remove("user");
+                    prefs.remove("password");
+
+                    Navigator.pushReplacement(
                         context,
                         PageTransition(
                             type: PageTransitionType.fade, child: MyApp()));
@@ -227,6 +263,9 @@ class _StoreScreenState extends State<StoreScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
+            onChanged: (value) {
+              filterSearchResults(value);
+            },
             controller: editingController,
             decoration: InputDecoration(
                 labelText: "Search",
@@ -268,7 +307,7 @@ class _StoreScreenState extends State<StoreScreen> {
                         child: Icon(Icons.location_pin),
                       ),
                       title: Text(
-                          API.simpan[index]['storename']
+                          itemToko[index]['storename']
                               .toString()
                               .replaceAll('{', '')
                               .replaceAll('}', ''),
@@ -276,13 +315,13 @@ class _StoreScreenState extends State<StoreScreen> {
                               fontFamily: "Roboto",
                               fontWeight: FontWeight.bold)),
                       subtitle: Text('Alamat: ' +
-                          API.simpan[index]['address'].toString() +
+                          itemToko[index]['address'].toString() +
                           '\n' +
                           'Jarak: ' +
                           API.jarak[index].toString() +
                           ' m' +
                           '\n' +
-                          API.simpan[index]["kunjungan"]
+                          itemToko[index]["kunjungan"]
                               .toString()
                               .replaceAll('kosong', '')),
                       onTap: () {
@@ -463,45 +502,16 @@ class StoreView extends StatelessWidget {
 }
 
 class itemStore {
-  var id;
-  String storecode;
+  String id;
+
   String storename;
   String address;
-  var dcid;
-  String dcname;
-  var accid;
-  String accname;
-  var subchanid;
-  String subchanname;
-  var chanid;
-  String channame;
-  var areaid;
-  String areaname;
-  var regid;
-  String regname;
-  String lat;
-  String long;
+  String kunjungan;
 
-  itemStore(
-      this.id,
-      this.storecode,
-      this.storename,
-      this.address,
-      this.dcid,
-      this.dcname,
-      this.accname,
-      this.subchanid,
-      this.subchanname,
-      this.chanid,
-      this.channame,
-      this.areaname,
-      this.regid,
-      this.regname,
-      this.lat,
-      this.long);
+  itemStore(this.id, this.storename, this.address, this.kunjungan);
 
   @override
   String toString() {
-    return '${id}  ${storecode}  ${storename}  ${address}  ${dcid}  ${dcname}  ${accname}  ${subchanid}  ${subchanname}  ${chanid}  ${channame}  ${areaname}  ${regid}  ${regname}  ${lat}  ${long}';
+    return '${id}  ${storename}  ${address}  ${kunjungan}';
   }
 }
